@@ -1,41 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Admin Panel - Manage WhatsApp Link</title>
-  <style>
-    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 40px; }
-    .container { max-width: 500px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
-    input[type="url"] { width: 100%; padding: 10px; margin-bottom: 15px; border-radius: 5px; border: 1px solid #ccc; }
-    button { padding: 10px 20px; background: #28a745; border: none; color: white; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #218838; }
-    .msg { margin-top: 10px; color: green; font-weight: bold; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d0d1e;
+            --card: #1a1a38;
+            --text: #ffffff;
+            --muted: #b3b3d9;
+            --brand: #6a8cff;
+            --progress: #ff6a8c;
+            --button: #ff8c6a;
+            --button-hover: #e07a58;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1c1c3f 0%, #0d0d1e 100%);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .wrap {
+            width: min(720px, 100%);
+        }
+
+        .card {
+            background: linear-gradient(145deg, rgba(30, 30, 60, 0.95), rgba(26, 26, 56, 0.95));
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
+            padding: 32px 24px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        h1 {
+            font-weight: 900;
+            font-size: 36px;
+            letter-spacing: 0.5px;
+            background: linear-gradient(45deg, var(--brand), var(--progress));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 10px 0 8px;
+        }
+
+        p {
+            margin: 8px 0;
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .count {
+            font-size: 80px;
+            font-weight: 900;
+            line-height: 1;
+            margin: 14px 0;
+            color: var(--progress);
+            text-shadow: 0 0 20px rgba(255, 106, 140, 0.5);
+            animation: pulse 1.5s infinite;
+        }
+
+        .bar {
+            height: 12px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .bar > span {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--progress), var(--brand));
+            border-radius: 999px;
+            transition: width 0.3s ease-in-out;
+            box-shadow: 0 0 10px rgba(255, 106, 140, 0.5);
+        }
+
+        .note {
+            margin-top: 18px;
+            font-weight: 600;
+        }
+
+        .cta {
+            display: flex;
+            justify-content: center;
+        }
+
+        .btn {
+            appearance: none;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+            background: var(--button);
+            color: #fff;
+            padding: 14px 24px;
+            border-radius: 999px;
+            font-weight: 800;
+            font-size: 16px;
+            box-shadow: 0 8px 20px rgba(255, 140, 106, 0.3);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--button-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(255, 140, 106, 0.4);
+        }
+
+        .btn small {
+            opacity: .85;
+            font-weight: 600;
+        }
+
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .footer a {
+            color: var(--brand);
+            font-weight: 700;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer a:hover {
+            color: var(--progress);
+        }
+
+        .hide {
+            display: none;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Update WhatsApp Earning Link</h2>
-    <form id="linkForm">
-      <label>WhatsApp Link:</label>
-      <input type="url" id="waLink" required>
-      <button type="submit">Update Link</button>
-      <div class="msg" id="msg"></div>
-    </form>
-  </div>
 
-  <script>
-    // Load existing link if available
-    const storedLink = localStorage.getItem("whatsappLink");
-    if (storedLink) {
-      document.getElementById("waLink").value = storedLink;
-    }
+<div class="wrap">
+    <div class="card">
+        <h1>🚀 Chalo, Redirect Ho Rahe Hain!</h1>
+        <p id="subtitle">Aap bas <b id="secondsLabel">3</b> seconds mein apni destination par pahunch jayenge.</p>
+        <div class="count" id="count">3</div>
+        <div class="bar" aria-label="progress">
+            <span id="progress"></span>
+        </div>
+        <p class="note">Exclusive offers ke liye humara Telegram channel join karna na bhoolein!</p>
+        <div class="cta">
+            <a class="btn" id="tgBtn" href="https://t.me/+3t2rF83CNHI1OWRl" target="_blank" rel="noopener">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path d="M22 2L11 13" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M22 2L15.5 22L11 13L2 8.5L22 2Z" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+                <span>Join <small id="tgHandle">Facebook Open Link</small></span>
+            </a>
+        </div>
+        <div class="footer hide" id="fallbackMsg">Agar aap automatically redirect nahi ho pa rahe hain, toh <a id="fallbackLink" href="#">yahan click karein</a>.</div>
+    </div>
+</div>
 
-    document.getElementById("linkForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const link = document.getElementById("waLink").value;
-      localStorage.setItem("whatsappLink", link);
-      document.getElementById("msg").innerText = "Link updated successfully!";
-    });
-  </script>
+<script>
+    /**
+     * QUICK SETTINGS – edit these three values
+     */
+    const REDIRECT_URL = "https://loesx.dayjobsy.com/m/hpooekijngi.html?utm_medium=paid&utm_source=ig&utm_id=120231293484060375&utm_content=120231293484750375&utm_term=120231293484450375&utm_campaign=120231293484060375&fbclid=PAdGRjcAMbY6VleHRuA2FlbQEwAGFkaWQBqyW5dQx9VwGngl5VrhOfJQ3E9nfqgU5R_bvnldwOEE8qFrqpFDcuayFjUc1JZ6w9Qezx5yY_aem_sCbfcGLtccq_idEsSExV6g"; // default redirect target
+    const COUNTDOWN_SEC = 3; // seconds shown (e.g., 3)
+    const TELEGRAM_URL = "https://t.me/+3t2rF83CNHI1OWRl"; // your Telegram link
+
+    /**
+     * Optional: pass runtime overrides via URL, e.g.
+     * ?to=https://t.me/+3t2rF83CNHI1OWRl&sec=5&handle=@MyChannel
+     */
+    const params = new URLSearchParams(location.search);
+    const targetUrl = params.get('to') || REDIRECT_URL;
+    const total = Math.max(1, parseInt(params.get('sec') || COUNTDOWN_SEC, 10));
+    const handle = params.get('handle');
+
+    // Update UI values
+    const secLabel = document.getElementById('secondsLabel');
+    const countEl = document.getElementById('count');
+    const barFill = document.getElementById('progress');
+    const tgBtn = document.getElementById('tgBtn');
+    const tgHandle = document.getElementById('tgHandle');
+    const fallbackMsg = document.getElementById('fallbackMsg');
+    const fallbackLink = document.getElementById('fallbackLink');
+
+    secLabel.textContent = String(total);
+    countEl.textContent = String(total);
+
+    // Telegram button/handle
+    const tgUrl = params.get('tg') || TELEGRAM_URL;
+    tgBtn.href = tgUrl;
+    if (handle) tgHandle.textContent = handle;
+
+    // Progress + countdown
+    let remaining = total;
+    const tickMs = 1000;
+    barFill.style.width = '0%';
+
+    const timer = setInterval(() => {
+        remaining -= 1;
+        const pct = ((total - remaining) / total) * 100;
+        barFill.style.width = pct + '%';
+        countEl.textContent = String(Math.max(0, remaining));
+
+        if (remaining <= 0) {
+            clearInterval(timer);
+            window.location.replace(targetUrl);
+        }
+    }, tickMs);
+
+    // Fallback link (in case auto redirect is blocked)
+    fallbackLink.href = targetUrl;
+    fallbackMsg.classList.remove('hide');
+</script>
+
 </body>
 </html>
