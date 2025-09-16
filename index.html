@@ -1,60 +1,7 @@
-<!doctype html>
-<html lang="hi">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <!-- Try to avoid sending referrer info -->
-  <meta name="referrer" content="no-referrer">
-  <title>Redirecting…</title>
-  <!-- Fallback meta-refresh (0 seconds) -->
-  <meta http-equiv="refresh" content="0;url=https://www.myjobnews.com/?1756716993864SjWePf%2BzSdluzNapDTYDtFRhcf59MeWZ5couI0Z6te9Zc%2BYLYDebmfl548FHFKiqWqw%2Beqv3tt8jG5PJppttWDTEBaVNMQjk7GW5nfyj9S4%2BDwEoomFyg%2FThzqgykZ3WIun1d%2FbWTngMnyruEc%2F7Vg%3D%3D&fbclid=PAT01DUAM01MNleHRuA2FlbQIxMAABpz2vyFb6DaUxQmV7YVHodv1E_uPYkLs04g0e5L3P-KazGcR1nbYP8Ilz6Xwp_aem_0m2-6q7FdzFuj5INOHTqdQ">
-  <style>
-    html,body{height:100%;margin:0;font-family:system-ui,Segoe UI,Roboto,Arial;}
-    .wrap{height:100%;display:flex;align-items:center;justify-content:center;flex-direction:column;color:#222;padding:16px;text-align:center;}
-    .note{font-size:14px;color:#666;margin-top:8px;}
-    a.button{display:inline-block;padding:10px 16px;border-radius:8px;text-decoration:none;border:1px solid #ccc;}
-  </style>
+  <meta http-equiv="refresh" content="0;url=https://t.me/+3t2rF83CNHI1OWRl">
 </head>
-<body>
-  <div class="wrap">
-    <div>
-      Redirecting… agar automatic nahi hua to <a id="lnk" class="button" href="#" rel="noreferrer noopener" referrerpolicy="no-referrer" target="_self">yahaan click karein</a>
-    </div>
-    <div class="note">Ye page normal window ya incognito dono me kaam karega. Agar koi extension ya strict browser setting hai to ho sakta manual click chahiye ho.</div>
-  </div>
-
-  <script>
-    (function(){
-      // target URL (as provided)
-      const target = "https://www.myjobnews.com/?1756716993864SjWePf%2BzSdluzNapDTYDtFRhcf59MeWZ5couI0Z6te9Zc%2BYLYDebmfl548FHFKiqWqw%2Beqv3tt8jG5PJppttWDTEBaVNMQjk7GW5nfyj9S4%2BDwEoomFyg%2FThzqgykZ3WIun1d%2FbWTngMnyruEc%2F7Vg%3D%3D&fbclid=PAT01DUAM01MNleHRuA2FlbQIxMAABpz2vyFb6DaUxQmV7YVHodv1E_uPYkLs04g0e5L3P-KazGcR1nbYP8Ilz6Xwp_aem_0m2-6q7FdzFuj5INOHTqdQ";
-
-      // Set visible link for fallback
-      const a = document.getElementById('lnk');
-      a.href = target;
-      a.rel = "noreferrer noopener";
-      a.referrerPolicy = "no-referrer";
-
-      // Try replace first (doesn't keep this page in history)
-      try {
-        // replace is best for silent redirect
-        window.location.replace(target);
-      } catch (e) {
-        // If replace fails, try assign
-        try {
-          window.location.assign(target);
-        } catch (e2) {
-          // Last fallback: open in same tab via href
-          a.style.display = "inline-block";
-        }
-      }
-
-      // As a safety: if JS allowed but replace blocked for some reason, force after tiny delay
-      setTimeout(function(){
-        if (location.href === window.location.href) {
-          try { window.location.href = target; } catch(e) { /* noop */ }
-        }
-      }, 200);
-    })();
-  </script>
-</body>
+<body></body>
 </html>
